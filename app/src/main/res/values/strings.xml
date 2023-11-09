@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fetch Rewards Coding Exercise</string>
+    <string name="app_name">Fetch Rewards Exercise</string>
     <string name="error_fetching_data">Error fetching data</string>
     <string name="id">Id</string>
     <string name="listid">ListId</string>
@@ -10,4 +10,6 @@
     <string name="filter_items_with_name">Filter items with name</string>
     <string name="sort_items_by_list_id_then_name">Sort items by List Id then Name</string>
     <string name="show_all_items">Show All Items</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
 </resources>

@@ -4,4 +4,7 @@
     <string name="id">Id</string>
     <string name="listid">ListId</string>
     <string name="name">Name</string>
+    <string name="idText">ID:</string>
+    <string name="listIdText">List ID:</string>
+    <string name="nameText">Name:</string>
 </resources>

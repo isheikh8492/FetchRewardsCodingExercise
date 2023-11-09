@@ -35,7 +35,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         Item item = itemList.get(position);
         holder.id.setText(item.getId().toString());
         holder.listId.setText(item.getListId().toString());
-        holder.name.setText(item.getName());
+        if (item.getName().equals("")) {
+            holder.nameText.setVisibility(View.GONE);
+            holder.name.setVisibility(View.GONE);
+        } else {
+            holder.nameText.setVisibility(View.VISIBLE);
+            holder.name.setVisibility(View.VISIBLE);
+            holder.name.setText(item.getName());
+        }
     }
 
     @Override

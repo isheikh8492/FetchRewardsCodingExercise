@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/my_light_primary"/> <!-- Replace with your desired purple color -->
+    <corners android:radius="8dp"/> <!-- Replace with your desired corner radius -->
+    <stroke android:width="0dp" />
+</shape>

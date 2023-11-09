@@ -2,9 +2,12 @@ package com.fetchrewards.codingexercise;
 
 import java.util.Objects;
 
+import javax.xml.namespace.QName;
+
 public class Item {
     private Integer id;
     private Integer listId;
+
     private String name;
 
     public Item(Integer id, Integer listId, String name) {
@@ -29,25 +32,17 @@ public class Item {
         this.listId = listId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(listId, item.listId) && Objects.equals(name, item.name);
+        return Objects.equals(id, item.id) && Objects.equals(listId, item.listId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, listId, name);
+        return Objects.hash(id, listId);
     }
 
     @Override
@@ -55,7 +50,14 @@ public class Item {
         return "Item{" +
                 "id=" + id +
                 ", listId=" + listId +
-                ", name='" + name + '\'' +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

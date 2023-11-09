@@ -7,4 +7,7 @@
     <string name="idText">ID:</string>
     <string name="listIdText">List ID:</string>
     <string name="nameText">Name:</string>
+    <string name="filter_items_with_name">Filter items with name</string>
+    <string name="sort_items_by_list_id_then_name">Sort items by List Id then Name</string>
+    <string name="show_all_items">Show All Items</string>
 </resources>

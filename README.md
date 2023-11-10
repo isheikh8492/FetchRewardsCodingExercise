@@ -13,6 +13,23 @@ This Android application is built to demonstrate fetching and rendering a list o
 - **Error Handling**: Shows an error layout if network connectivity is unavailable or if data fetching fails.
 - **UI Polish**: Implements a ProgressBar to indicate loading states to the user.
 
+## Screenshots
+
+### Main Screen
+
+![fetch1](https://github.com/isheikh8492/FetchRewardsCodingExercise/assets/60596395/c7d6a19e-a217-4dac-8c09-1096f0897f11)
+
+- **Hamburger Icon**: This icon, featuring three horizontal lines, is your gateway to the drawer layout. Tapping on it reveals a list of 'listIds'. Users can select any 'listId' from this drawer to view the corresponding items grouped under that specific 'listId'.
+
+![image](https://github.com/isheikh8492/FetchRewardsCodingExercise/assets/60596395/38a47f30-36ed-461a-9f15-cd9d41762ed3)
+
+- **Overflow Menu Icon**: Displayed as three vertical dots, this icon leads to the options menu. Within this menu, users have access to various functionalities:
+   - The first option filters out items with blank names, ensuring only items with valid names are displayed.
+   - The second option allows users to sort the items, first by their List IDs and then by their names, facilitating easier navigation and item location.
+   - The third option is a reset feature that allows users to revert to the default view, showing all items without any filters or sorting applied.
+
+![image](https://github.com/isheikh8492/FetchRewardsCodingExercise/assets/60596395/1b4ca909-0ab5-4323-bdde-a777cb938837)
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:

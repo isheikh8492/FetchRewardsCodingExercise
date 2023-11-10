@@ -7,7 +7,6 @@ import javax.xml.namespace.QName;
 public class Item {
     private Integer id;
     private Integer listId;
-
     private String name;
 
     public Item(Integer id, Integer listId, String name) {

@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         );
 
         drawerToggle = new ActionBarDrawerToggle(
-                this,            /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
+                this,
+                drawerLayout,
+                R.string.drawer_open,
+                R.string.drawer_close
         );
 
         recyclerView = findViewById(R.id.recycler);
@@ -147,8 +147,21 @@ public class MainActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.sortItems) {
             if (this.sortedItemList.isEmpty()) {
-                this.sortedItemList = itemList.stream().sorted(Comparator
-                        .comparing(Item::getListId)).collect(Collectors.toList());
+                this.sortedItemList = itemList.stream()
+                        .sorted(Comparator
+                                .comparing(Item::getListId)
+                                .thenComparing((item1, item2) -> {
+                                    if (item1.getName().isEmpty() && item2.getName().isEmpty()) {
+                                        return 0;
+                                    } else if (item1.getName().isEmpty()) {
+                                        return 1;
+                                    } else if (item2.getName().isEmpty()) {
+                                        return -1;
+                                    } else {
+                                        return item1.getName().compareTo(item2.getName());
+                                    }
+                                }))
+                        .collect(Collectors.toList());
             }
             itemAdapter = new ItemAdapter(this.sortedItemList, this);
             recyclerView.setAdapter(itemAdapter);

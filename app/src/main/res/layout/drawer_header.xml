@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_header_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#3F51B5"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:text="Select List Ids"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    android:textColor="@android:color/white"/>
+

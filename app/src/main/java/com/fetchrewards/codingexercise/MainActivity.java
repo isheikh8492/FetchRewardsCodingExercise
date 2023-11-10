@@ -3,6 +3,7 @@ package com.fetchrewards.codingexercise;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -85,6 +87,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(borderItemDecoration);
 
         doDownload();
+
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listIds);
+        drawerList.setAdapter(arrayAdapter);
+
+        // Set the list's click listener
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                selectItem(position);
+            }
+        });
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

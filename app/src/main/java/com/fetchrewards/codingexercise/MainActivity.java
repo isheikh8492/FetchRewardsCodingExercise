@@ -17,14 +17,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemAdapter itemAdapter;
     private RecyclerView recyclerView;
 
-    private TextView errorTxtView;
+    private LinearLayout errorLayout;
 
     private LinearLayoutManager linearLayoutManager;
 
@@ -77,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(itemAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        errorTxtView = findViewById(R.id.error);
-        errorTxtView.setVisibility(View.GONE);
+        errorLayout = findViewById(R.id.error);
+        errorLayout.setVisibility(View.GONE);
 
         BorderItemDecoration borderItemDecoration = new BorderItemDecoration(this);
         recyclerView.addItemDecoration(borderItemDecoration);
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         recyclerView.setVisibility(View.VISIBLE);
-        errorTxtView.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.GONE);
         this.itemList = itemList;
         this.listIdMap = listIdMap;
         listIds = this.listIdMap.keySet().stream().sorted().collect(Collectors.toList());
@@ -209,6 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setErrorText() {
         recyclerView.setVisibility(View.GONE);
-        errorTxtView.setVisibility(View.VISIBLE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 }

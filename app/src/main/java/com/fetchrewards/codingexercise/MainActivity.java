@@ -21,8 +21,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -53,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<Integer> arrayAdapter;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerList = findViewById(R.id.drawer_list);
+        progressBar = findViewById(R.id.progressBar);
 
         drawerList.setOnItemClickListener(
                 (parent, view, position, id) -> {
@@ -104,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
+    }
+
+    private void toggleProgressBar(boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -201,11 +212,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doDownload() {
-        ItemDownloader.downloadItems(this);
+        if (hasNetworkConnection()) {
+            toggleProgressBar(true); // Show ProgressBar before starting download
+            ItemDownloader.downloadItems(this); // Start the download process
+        } else {
+            setErrorText();
+        }
     }
 
     public void updateData(List<Item> itemList, HashMap<Integer, List<Integer>> listIdMap) {
-        if ((itemList == null) || (!(hasNetworkConnection()))) {
+        toggleProgressBar(false);
+        if (itemList == null) {
             setErrorText();
             return;
         }

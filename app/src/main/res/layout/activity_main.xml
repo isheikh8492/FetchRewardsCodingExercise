@@ -76,5 +76,12 @@
             android:layout_marginTop="?attr/actionBarSize"/>
     </com.google.android.material.navigation.NavigationView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

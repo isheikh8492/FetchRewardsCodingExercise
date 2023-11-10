@@ -41,7 +41,7 @@ public class ItemDownloader {
         try {
             JSONArray jObjMain = new JSONArray(s);
 
-            for (int i = 0; i < jObjMain.length()-900; i++) {
+            for (int i = 0; i < jObjMain.length(); i++) {
                 JSONObject jItem = jObjMain.getJSONObject(i);
                 Integer jId = jItem.getInt("id");
                 Integer jListId = jItem.getInt("listId");

@@ -25,3 +25,35 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 ```bash
 git clone https://github.com/isheikh8492/FetchRewardsCodingExercise.git
+```
+2. Open Android Studio and select 'Open an existing project'.
+3. Navigate to the cloned repository and open it.
+
+## Running the App
+
+Build and run the application using Android Studio. Ensure you have a suitable Android device or emulator selected. The app will fetch data when launched and display it according to the exercise requirements.
+
+## Approach
+
+The application is designed with a clean architecture in mind, separating concerns into UI, data handling, and service layers.
+
+- MainActivity: Orchestrates UI interactions and data fetching.
+- ItemAdapter: Custom RecyclerView adapter for rendering sorted and filtered items.
+- ItemDownloader: Handles data fetching logic using Volley and callbacks to MainActivity.
+- BorderItemDecoration: Enhances RecyclerView items with styled borders.
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and create a pull request with your changes. Please make sure to update tests as appropriate.
+
+## Authors
+
+Imaduddin Sheikh
+
+
+
+## Acknowledgments
+
+Thanks to Fetch Rewards for the opportunity to undertake this exercise. It has been a valuable experience in demonstrating modern Android development practices.
+
+

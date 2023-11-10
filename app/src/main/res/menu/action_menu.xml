@@ -10,7 +10,5 @@
         android:title="@string/sort_items_by_list_id_then_name" />
     <item
         android:id="@+id/allItems"
-        android:icon="@drawable/return_svgrepo_com__1_"
-        app:showAsAction="always"
-        android:title="" />
+        android:title="@string/show_all_items" />
 </menu>

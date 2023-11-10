@@ -3,4 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="my_light_primary">#673AB7</color>
+    <color name="primary">#300d38</color>
+    <color name="light_purple">#890a74</color>
+    <color name="gold">#FBA919</color>
+    <color name="background_color">#AEEADF</color>
 </resources>

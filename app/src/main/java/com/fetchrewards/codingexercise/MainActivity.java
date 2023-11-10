@@ -2,33 +2,30 @@ package com.fetchrewards.codingexercise;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private List<Item> itemList = new ArrayList<>();
     private List<Item> itemListWithNameOnly = new ArrayList<>();
     private List<Item> sortedItemList = new ArrayList<>();
+    private HashMap<Integer, List<Integer>> listIdMap = new HashMap<>();
+    private List<Item> currentItemList = new ArrayList<>();
+    private List<Integer> listIds = new ArrayList<>();
     private ItemAdapter itemAdapter;
     private RecyclerView recyclerView;
 
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
+
+    private ArrayAdapter<Integer> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,21 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void selectItem(int position) {
+        currentItemList.clear();
         Log.d(TAG, "selectItem: " + position);
+        Integer listId = listIds.get(position);
+
+        List<Integer> currentItemIds = listIdMap.get(listId);
+        for (Integer id : currentItemIds) {
+            Optional<Item> item = itemList.stream().filter(i -> i.getId().equals(id)).findFirst();
+            item.ifPresent(value -> currentItemList.add(value));
+        }
+
+        itemAdapter = new ItemAdapter(this.currentItemList, this);
+        recyclerView.setAdapter(itemAdapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     @Override
@@ -160,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         ItemDownloader.downloadItems(this);
     }
 
-    public void updateData(List<Item> itemList) {
+    public void updateData(List<Item> itemList, HashMap<Integer, List<Integer>> listIdMap) {
         if ((itemList == null) || (!(hasNetworkConnection()))) {
             setErrorText();
             return;
@@ -168,6 +184,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setVisibility(View.VISIBLE);
         errorTxtView.setVisibility(View.GONE);
         this.itemList = itemList;
+        this.listIdMap = listIdMap;
+        listIds = this.listIdMap.keySet().stream().sorted().collect(Collectors.toList());
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.drawer_item, listIds);
+        drawerList.setAdapter(arrayAdapter);
         itemAdapter = new ItemAdapter(this.itemList, this);
         recyclerView.setAdapter(itemAdapter);
         linearLayoutManager = new LinearLayoutManager(this);

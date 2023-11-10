@@ -1,21 +1,18 @@
 package com.fetchrewards.codingexercise;
 
-import android.net.Uri;
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 public class ItemDownloader {
     private static final String TAG = "ItemDownloader";
@@ -23,6 +20,7 @@ public class ItemDownloader {
     private static RequestQueue queue;
     private static Item itemObj;
     private static List<Item> itemList = new ArrayList<>();
+    private static HashMap<Integer, List<Integer>> listIdMap = new HashMap<>();
     private static final String fetchUrl = "https://fetch-hiring.s3.amazonaws.com/hiring.json";
 
     public static void downloadItems(MainActivity mainActivityIn) {
@@ -32,7 +30,7 @@ public class ItemDownloader {
         Response.Listener<JSONArray> listener =
                 response -> parseJSON(response.toString());
         Response.ErrorListener error =
-                error1 -> mainActivity.updateData(null);
+                error1 -> mainActivity.updateData(null, listIdMap);
         JsonArrayRequest jsonArrayRequestRequest =
                 new JsonArrayRequest(Request.Method.GET, fetchUrl,
                         null, listener, error);
@@ -53,8 +51,12 @@ public class ItemDownloader {
                 }
                 itemObj = new Item(jId, jListId, jName);
                 itemList.add(itemObj);
+                if (!listIdMap.containsKey(jListId)) {
+                    listIdMap.put(itemObj.getListId(), new ArrayList<>());
+                }
+                Objects.requireNonNull(listIdMap.get(jListId)).add(itemObj.getId());
             }
-            mainActivity.updateData(itemList);
+            mainActivity.updateData(itemList, listIdMap);
         } catch (Exception e) {
             e.printStackTrace();
         }
